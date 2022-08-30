@@ -8,13 +8,34 @@ plugins {
 //    targetCompatibility = JavaVersion.VERSION_1_7
 //}
 
+//publishing {
+//    publications {
+//        create<MavenPublication>("test-lib") {
+//            from(components["java"])
+//            artifactId = "test-library"
+//            groupId = "com.github.ilushakr"
+//            version = "1.0"
+//        }
+//    }
+//}
+
+
+val sourcesJar by tasks.registering(Jar::class) {
+    classifier = "sources"
+    from(sourceSets.main.get().allSource)
+}
+
 publishing {
+//    repositories {
+//        maven {
+//            // change to point to your repo, e.g. http://my.org/repo
+//            url = uri("$buildDir/repo")
+//        }
+//    }
     publications {
-        create<MavenPublication>("test-lib") {
+        register("mavenJava", MavenPublication::class) {
             from(components["java"])
-            artifactId = "test-library"
-            groupId = "com.github.ilushakr"
-            version = "1.0"
+            artifact(sourcesJar.get())
         }
     }
 }
