@@ -14,7 +14,7 @@ publishing {
             from(components["java"])
             artifactId = "test-library"
             groupId = "com.github.ilushakr"
-            version = "1.0.0"
+            version = "1.0"
         }
     }
 }
